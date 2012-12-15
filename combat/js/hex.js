@@ -715,8 +715,16 @@ var HexGrid = Class.create({
 			fnOnClick(G.grid.hexs[y][x],args);
 		});
 
-		//ON CANCEL
-		this.$allInptHex.filter(".hex.not-reachable").bind('click', function(){	G.grid.lastClickedtHex = []; fnOnCancel(args); });
+		//ON CANCEL if creature clicked post it in log
+		this.$allInptHex.filter(".hex.not-reachable").bind('click', function(){	G.grid.lastClickedtHex = []; fnOnCancel(args);
+                      var x = $j(this).attr("x")-0;
+         	      var y = $j(this).attr("y")-0;
+                      for (var i = 1; i <= G.creatures.length; i++) {
+                          if (G.creatures[i].pos.x == x && G.creatures[i].pos.y == y) {
+                              G.log("Clicked: " + G.creatures[i].name + " " + G.creatures[i].type);
+                          }
+                      }
+                 });
 	},
 
 
