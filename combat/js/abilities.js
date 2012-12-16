@@ -3,6 +3,9 @@
 *	Class parsing function from creature abilities
 *
 */
+
+var ability_selected; // global var: true if ability is selected, after ability fails or works set it false
+
 var Ability = Class.create({
 	initialize: function(creature,abilityID){
 		this.creature = creature;
@@ -18,6 +21,8 @@ var Ability = Class.create({
 	*
 	*/
 	use: function(){
+                G.log(this.creature.player.name+"'s "+this.creature.name+" selects "+this.title);
+                ability_selected = true;
 		if( this.trigger != "onQuery" ) return;
 		if( !this.require() ) return;
 		if( this.used == true ){ G.log("Ability already used!"); return; }
@@ -33,7 +38,8 @@ var Ability = Class.create({
 		if(this.trigger == "onQuery") G.activeCreature.queryMove();
 
 		G.log(this.creature.player.name+"'s "+this.creature.name+" uses "+this.title);
-		this.used = true; //Should always be here
+		ability_selected = false;
+                this.used = true; //Should always be here
 	},
 
 

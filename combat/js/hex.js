@@ -718,9 +718,9 @@ var HexGrid = Class.create({
 		//ON CANCEL if creature clicked post it in log
 		this.$allInptHex.filter(".hex.not-reachable").bind('click', function(){	G.grid.lastClickedtHex = []; fnOnCancel(args);
                       var x = $j(this).attr("x")-0;
-         	      var y = $j(this).attr("y")-0;
+                      var y = $j(this).attr("y")-0;
                       for (var i = 1; i <= G.creatures.length; i++) {
-                          if (G.creatures[i].pos.x == x && G.creatures[i].pos.y == y) {
+                          if (G.creatures[i].pos.x == x && G.creatures[i].pos.y == y && !ability_selected) {
                               G.log("Clicked: " + G.creatures[i].name + " " + G.creatures[i].type);
                           }
                       }
